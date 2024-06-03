@@ -10,10 +10,8 @@ folder = sys.argv[2]
 def upload(directory, remote_directory):
     for filename in os.listdir(directory):
         if os.path.isfile(directory + '/' + filename):
-            r = '--remote-name="'
-            q = '"'
-            print(f'Uploading {directory + "/" + filename} to {(remote_directory + "/" + filename) if remote_directory else "[root]"}')
-            os.system(f'ia upload {identifier} "{directory + "/" + filename}" {(r + remote_directory + "/" + filename + q) if remote_directory else ""}')
+            print(f'Uploading {directory + "/" + filename} to {(remote_directory + "/" + filename) if remote_directory else filename}')
+            os.system(f'ia upload {identifier} "{directory + "/" + filename}" --remote-name="{(remote_directory + "/" + filename) if remote_directory else filename}"')
         elif os.path.isdir(directory + '/' + filename):
             upload(directory + '/' + filename, (remote_directory + '/' + filename) if remote_directory else filename)
 upload(folder, '')
